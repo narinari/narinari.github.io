@@ -1,24 +1,98 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Narinari's Blog]]></title>
-  <link href="http://narinari.github.io/atom.xml" rel="self"/>
-  <link href="http://narinari.github.io/"/>
-  <updated>2014-04-15T01:24:33+09:00</updated>
-  <id>http://narinari.github.io/</id>
-  <author>
-    <name><![CDATA[narinari]]></name>
-    
-  </author>
-  <generator uri="http://octopress.org/">Octopress</generator>
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Y Combinator - Narinari's Blog</title>
+  <meta name="author" content="narinari">
 
   
-  <entry>
-    <title type="html"><![CDATA[Y Combinator]]></title>
-    <link href="http://narinari.github.io/blog/2014/04/12/y-combinator/"/>
-    <updated>2014-04-12T11:33:07+09:00</updated>
-    <id>http://narinari.github.io/blog/2014/04/12/y-combinator</id>
-    <content type="html"><![CDATA[<h2>昔話</h2>
+  <meta name="description" content="昔話 友人がYコンビネータの定義が理解できないと呟いていた。
+それをみて、自分もその定義を見て理解できなかったことを思い出しました。 私がYコンビネータを知ったのは、ポール・グレアムがYコンビネータ社を創立したときだと思います。 Yコンビネータに反応した根っこは、min-camlを何かで知って、 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://narinari.github.io/blog/2014/04/12/y-combinator">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Narinari's Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Narinari's Blog</a></h1>
+  
+    <h2>Software developer</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:narinari.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Y Combinator</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-12T11:33:07+09:00" pubdate data-updated="true">2014-04-12</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>昔話</h2>
 
 <p>友人がYコンビネータの定義が理解できないと呟いていた。
 それをみて、自分もその定義を見て理解できなかったことを思い出しました。</p>
@@ -94,16 +168,108 @@ Yコンビネータの定義①は、同じ変数名を使っているのでわ�
 <p>ラムダ式は名前をつけることは必須じゃないので、自分自身を呼び出す無名関数は定義できないように思います。でも、ラムダ式には束縛変数（引数）があるので、無名関数を引数に渡して変数に束縛し、束縛変数のもとで再起するような関数を作り出せばいいことに気がつけば、Yコンビネータはまさに任意の関数を再起呼び出しする関数を作り出していることがわかります。</p>
 
 <p>再起ができればループも実現できるし、実は条件分岐もラムダ式で記述できるから、ラムダ式だけでプログラムが記述できる、ラムダ抽象SUGEEEEEEE!!!ってなるわけですね。</p>
-]]></content>
-  </entry>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
   
-  <entry>
-    <title type="html"><![CDATA[Octopress First Post]]></title>
-    <link href="http://narinari.github.io/blog/2014/03/07/octopress-first-post/"/>
-    <updated>2014-03-07T01:12:47+09:00</updated>
-    <id>http://narinari.github.io/blog/2014/03/07/octopress-first-post</id>
-    <content type="html"><![CDATA[<p>Blogはじめます</p>
-]]></content>
-  </entry>
+
+<span class="byline author vcard">Posted by <span class="fn">narinari</span></span>
+
+      
+
+
+
+
+
+
+
+
   
-</feed>
+
+
+<time datetime="2014-04-12T11:33:07+09:00" pubdate data-updated="true">2014-04-12</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://narinari.github.io/blog/2014/04/12/y-combinator/" data-via="" data-counturl="http://narinari.github.io/blog/2014/04/12/y-combinator/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/03/07/octopress-first-post/" title="Previous Post: Octopress first post">&laquo; Octopress first post</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/04/12/y-combinator/">Y Combinator</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/03/07/octopress-first-post/">Octopress First Post</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - narinari -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

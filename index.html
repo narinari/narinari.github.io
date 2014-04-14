@@ -9,8 +9,8 @@
   <meta name="author" content="narinari">
 
   
-  <meta name="description" content="Blogはじめます
-">
+  <meta name="description" content="昔話 友人がYコンビネータの定義が理解できないと呟いていた。
+それをみて、自分もその定義を見て理解できなかったことを思い出しました。 私がYコンビネータを知ったのは、ポール・グレアムがYコンビネータ社を創立したときだと思います。 Yコンビネータに反応した根っこは、min-camlを何かで知って、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -72,6 +72,117 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2014/04/12/y-combinator/">Y Combinator</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-12T11:33:07+09:00" pubdate data-updated="true">2014-04-12</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>昔話</h2>
+
+<p>友人がYコンビネータの定義が理解できないと呟いていた。
+それをみて、自分もその定義を見て理解できなかったことを思い出しました。</p>
+
+<p>私がYコンビネータを知ったのは、ポール・グレアムが<a href="http://ycombinator.com/">Yコンビネータ社</a>を創立したときだと思います。</p>
+
+<p>Yコンビネータに反応した根っこは、<a href="https://github.com/esumii/min-caml">min-caml</a>を何かで知って、オブジェクト指向に傾倒していた私に関数型言語という新たな世界を知ったことに始まります。
+当時の自分は、プログラミング言語の要素はどのようなパラダイムであっても、変数定義や制御構文がベースとしてあって、その上にクラスの定義やメソッドの定義があるように捉えてました（関数や手続きの定義は、メソッド定義のバリエーションのように思っていた）。
+新しい言語でプログラミングするにしても、ベースとなる部分は変わらないし、その上に乗っかる部分はキーワードや構文が異なるだけで本質的に同じように理解しても不自由しませんでした。
+そんな中で、min-camlにはじめとして、OCaml、Haskellなどの関数型言語を知りました。</p>
+
+<p>関数関数と言ってもC言語の関数との違いがわからず、関数を第一級市民とすることに、どれだけのありがたみがわからない中で、関数を重要視する言語があるというのだから、何かあるんだろうとモヤモヤしている
+時に、Yコンビネータ社の語源をたどって知ったのでした。</p>
+
+<p>友人が悶々としていたYコンビネータの定義は以下の様なものでした。多分、自分が見た時も同じ式だったと思います。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Y = λ f. (λ x. f(x x))(λ x. f(x x)) -- ①</span></code></pre></td></tr></table></div></figure>
+
+
+<p>当時は色々なブログでYコンビネータについて解説していたのですが、単体では理解できず、記事を渡り歩いて理解しました。
+改めて見ると、すっかり忘れて同じように当惑してしまったので、復習を兼ねて勉強しなおし、友人が理解できるように説明したので、転載しておきます。
+多分、将来の自分がまた見なおすと思うので。。。</p>
+
+<h2>代入して考えてみる</h2>
+
+<p>まず、Yコンビネータの定義に具体的な値を適用してみました。
+Yコンビネータの定義①は、同じ変数名を使っているのでわかりにくいと感じたので、以下のように変形しました。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Y = λ f. (λ y. f(y y))(λ x. f(x x)) -- ①の最初の変数名を変えた x→y</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Yコンビネータに関数aを適用してみる。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Y a = (λf. (λ z. f(z z))(λ x. f(x x))) a -- ②
+</span><span class='line'>    = (λ z. a(z z))(λ x. a(x x)) -- ③β簡約:fをaに置き換えた
+</span><span class='line'>    = a((λ x. a(x x)) (λx. a(x x))) -- β簡約:zをλx. a(x x)に置き換えた
+</span><span class='line'>         ^^^^^^^^^^^^^^^^^^^^^^^^</span></code></pre></td></tr></table></div></figure>
+
+
+<p>下線部は、②の最初の関数の束縛変数zをxにしただけで同じ関数になります。
+③は、Yコンビネータに関数aを適用(β簡約)した結果だから、<code>Y a</code>に置き換えられるので、以下のようになる。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Y a = a(Y a) -- 下線部を置き換えた</span></code></pre></td></tr></table></div></figure>
+
+
+<p>結局、Yコンビネータに関数を適用したら、渡された関数を再起呼び出しする関数が得られるのでした。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Y a = a(Y a)
+</span><span class='line'>= a(a(Y a)) -- Y aを展開
+</span><span class='line'>= a(a(a(Y a))) -- もっと展開
+</span><span class='line'>= a(a(a(a(Y a)))) -- もっともっと展(ry
+</span><span class='line'>...</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>ラムダ式との関係</h2>
+
+<p>最後の下線を書き換えるところが、最初の関門だと思います。それ以前に当時の自分は、λ x. a(x x)の定義を見て、「引数のxにx自身を適用する意味がわからない」と混乱していましたが。</p>
+
+<p>結局のところ、それが何なの？という結果になりましたが、ラムダ式の世界で生まれたことを忘れると、この流れの思考は迷子になります。</p>
+
+<p>ラムダ式は名前をつけることは必須じゃないので、自分自身を呼び出す無名関数は定義できないように思います。でも、ラムダ式には束縛変数（引数）があるので、無名関数を引数に渡して変数に束縛し、束縛変数のもとで再起するような関数を作り出せばいいことに気がつけば、Yコンビネータはまさに任意の関数を再起呼び出しする関数を作り出していることがわかります。</p>
+
+<p>再起ができればループも実現できるし、実は条件分岐もラムダ式で記述できるから、ラムダ式だけでプログラムが記述できる、ラムダ抽象SUGEEEEEEE!!!ってなるわけですね。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2014/03/07/octopress-first-post/">Octopress First Post</a></h1>
     
     
@@ -114,6 +225,10 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/04/12/y-combinator/">Y Combinator</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2014/03/07/octopress-first-post/">Octopress First Post</a>
