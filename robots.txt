@@ -1,4 +1,4 @@
 User-agent: *
-Disallow: 
+Disallow:
 
-Sitemap: http://narinari.github.io/sitemap.xml 
+Sitemap: http://narinari.github.io/sitemap.xml

@@ -4,7 +4,7 @@
   <title><![CDATA[Narinari's Blog]]></title>
   <link href="http://narinari.github.io/atom.xml" rel="self"/>
   <link href="http://narinari.github.io/"/>
-  <updated>2014-04-15T01:24:33+09:00</updated>
+  <updated>2014-04-15T01:33:56+09:00</updated>
   <id>http://narinari.github.io/</id>
   <author>
     <name><![CDATA[narinari]]></name>
@@ -98,7 +98,7 @@ Yコンビネータの定義①は、同じ変数名を使っているのでわ�
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Octopress First Post]]></title>
+    <title type="html"><![CDATA[Octopress first post]]></title>
     <link href="http://narinari.github.io/blog/2014/03/07/octopress-first-post/"/>
     <updated>2014-03-07T01:12:47+09:00</updated>
     <id>http://narinari.github.io/blog/2014/03/07/octopress-first-post</id>

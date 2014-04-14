@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Blog | Narinari's Blog]]></title>
+  <title><![CDATA[Category: blog | Narinari's Blog]]></title>
   <link href="http://narinari.github.io/blog/categories/blog/atom.xml" rel="self"/>
   <link href="http://narinari.github.io/"/>
-  <updated>2014-04-15T01:24:33+09:00</updated>
+  <updated>2014-04-15T01:33:56+09:00</updated>
   <id>http://narinari.github.io/</id>
   <author>
     <name><![CDATA[narinari]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Octopress First Post]]></title>
+    <title type="html"><![CDATA[Octopress first post]]></title>
     <link href="http://narinari.github.io/blog/2014/03/07/octopress-first-post/"/>
     <updated>2014-03-07T01:12:47+09:00</updated>
     <id>http://narinari.github.io/blog/2014/03/07/octopress-first-post</id>
