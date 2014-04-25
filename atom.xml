@@ -4,7 +4,7 @@
   <title><![CDATA[Narinari's Blog]]></title>
   <link href="http://narinari.github.io/atom.xml" rel="self"/>
   <link href="http://narinari.github.io/"/>
-  <updated>2014-04-15T09:15:56+09:00</updated>
+  <updated>2014-04-25T18:12:43+09:00</updated>
   <id>http://narinari.github.io/</id>
   <author>
     <name><![CDATA[narinari]]></name>
@@ -18,10 +18,12 @@
     <link href="http://narinari.github.io/blog/2014/04/12/y-combinator/"/>
     <updated>2014-04-12T11:33:07+09:00</updated>
     <id>http://narinari.github.io/blog/2014/04/12/y-combinator</id>
-    <content type="html"><![CDATA[<h2>昔話</h2>
-
-<p>友人がYコンビネータの定義が理解できないと呟いていた。
+    <content type="html"><![CDATA[<p>友人がYコンビネータの定義が理解できないと呟いていた。
 それをみて、自分もその定義を見て理解できなかったことを思い出しました。</p>
+
+<p>すっかり忘れてしまっていたので、Yコンビネータについて復習をしてみました。</p>
+
+<h2>昔話</h2>
 
 <p>私がYコンビネータを知ったのは、ポール・グレアムが<a href="http://ycombinator.com/">Yコンビネータ社</a>を創立したときだと思います。</p>
 
