@@ -4,7 +4,7 @@
   <title><![CDATA[Narinari's Blog]]></title>
   <link href="http://narinari.github.io/atom.xml" rel="self"/>
   <link href="http://narinari.github.io/"/>
-  <updated>2014-04-25T18:12:43+09:00</updated>
+  <updated>2014-04-25T18:14:34+09:00</updated>
   <id>http://narinari.github.io/</id>
   <author>
     <name><![CDATA[narinari]]></name>
@@ -21,7 +21,8 @@
     <content type="html"><![CDATA[<p>友人がYコンビネータの定義が理解できないと呟いていた。
 それをみて、自分もその定義を見て理解できなかったことを思い出しました。</p>
 
-<p>すっかり忘れてしまっていたので、Yコンビネータについて復習をしてみました。</p>
+<p>すっかり忘れてしまっていたので、Yコンビネータについて復習をしてみました。
+友人が理解できるように説明したので、転載しておきます。</p>
 
 <h2>昔話</h2>
 
@@ -41,9 +42,7 @@
 </pre></td><td class='code'><pre><code class=''><span class='line'>Y = λ f. (λ x. f(x x))(λ x. f(x x)) -- ①</span></code></pre></td></tr></table></div></figure>
 
 
-<p>当時は色々なブログでYコンビネータについて解説していたのですが、単体では理解できず、記事を渡り歩いて理解しました。
-改めて見ると、すっかり忘れて同じように当惑してしまったので、復習を兼ねて勉強しなおし、友人が理解できるように説明したので、転載しておきます。
-多分、将来の自分がまた見なおすと思うので。。。</p>
+<p>当時は色々なブログでYコンビネータについて解説していたのですが、単体では理解できず、記事を渡り歩いて理解しました。</p>
 
 <h2>代入して考えてみる</h2>
 
