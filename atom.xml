@@ -4,7 +4,7 @@
   <title><![CDATA[Narinari's Blog]]></title>
   <link href="http://narinari.github.io/atom.xml" rel="self"/>
   <link href="http://narinari.github.io/"/>
-  <updated>2014-04-25T19:33:59+09:00</updated>
+  <updated>2014-05-03T15:28:23+09:00</updated>
   <id>http://narinari.github.io/</id>
   <author>
     <name><![CDATA[narinari]]></name>
@@ -12,6 +12,100 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Consul with Docker]]></title>
+    <link href="http://narinari.github.io/blog/2014/04/25/consul-with-docker/"/>
+    <updated>2014-04-25T14:00:47+09:00</updated>
+    <id>http://narinari.github.io/blog/2014/04/25/consul-with-docker</id>
+    <content type="html"><![CDATA[<p>ConsulをDockerで動かした遊んでみました。</p>
+
+<p>Consulについてはいち早く翻訳&amp;解説している素晴らしい人がいるので、そちらを参照してください。</p>
+
+<ul>
+<li><a href="http://pocketstudio.jp/log3/2014/04/18/what_is_consul/">Consulを使ってみた | Pocketstudio.jp log3</a></li>
+<li><a href="http://pocketstudio.jp/log3/2014/04/19/translation_consul_related_documents/">Consul関連文書の参考訳、Serfとの違い等 | Pocketstudio.jp log3</a></li>
+<li><a href="http://pocketstudio.jp/log3/2014/04/23/consul_docs_part2/">Consul関連ドキュメント(参考訳)Part2 | Pocketstudio.jp log3</a></li>
+</ul>
+
+
+<p>まずは、Dockerfileを作ります。</p>
+
+<div><script src='https://gist.github.com/11283798.js'></script>
+<noscript><pre><code>FROM ubuntu
+
+RUN apt-get update &amp;&amp; DEBIAN_FRONTEND=noninteractive apt-get install -y \
+    build-essential \
+    wget \
+    curl \
+    git
+
+RUN curl -L -o counsul.zip &quot;https://dl.bintray.com/mitchellh/consul/0.2.0_linux_amd64.zip&quot; &amp;&amp; unzip consul.zip &amp;&amp; mv consul /usr/local/bin
+
+EXPOSE 8400 8500 8600 8301 8302
+ENTRYPOINT [&quot;consul&quot;]</code></pre></noscript></div>
+
+
+<p>動作させるようにするには以下のようにします。</p>
+
+<p>まず、上記のDockerfileのあるディレクトリに移動して<code>consul</code>という名前でDockerイメージを作ります。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">cd </span>docker-consul
+</span><span class='line'><span class="nv">$ </span>sudo docker build -t consul .
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>エージェントをサーバモードで起動します。最後のオプション<code>-client</code>を指定しないと、ホストからconsulに問い合わせができなくなります。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo docker run -t -i --rm consul agent -server -bootstrap -data-dir ./data/consul1 -client<span class="o">=</span>0.0.0.0
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>必要なだけターミナルを開いて、エージェントをクライアントモードで起動します。<code>-node</code>で名前をつけておくとログを追いやすいです。<code>172.17.0.2</code>はサーバモードで起動しているDockerのIPです。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo docker run -t -i --rm consul agent -node<span class="o">=</span>consul2 -data-dir /tmp -join<span class="o">=</span>172.17.0.2
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>consulサーバに問い合わせて状況を確認できます。URLはサーバを起動したコンテナのIPを指定します。デフォルトでは起動する度に172.17.0.2から順番に割り当てられます。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>curl 172.17.0.2:8500/v1/catalog/nodes
+</span><span class='line'><span class="o">[{</span><span class="s2">&quot;Node&quot;</span>:<span class="s2">&quot;56e2c7b30308&quot;</span>,<span class="s2">&quot;Address&quot;</span>:<span class="s2">&quot;172.17.0.2&quot;</span><span class="o">}</span>,<span class="o">{</span><span class="s2">&quot;Node&quot;</span>:<span class="s2">&quot;consul2&quot;</span>,<span class="s2">&quot;Address&quot;</span>:<span class="s2">&quot;172.17.0.4&quot;</span><span class="o">}</span>,<span class="o">{</span><span class="s2">&quot;Node&quot;</span>:<span class="s2">&quot;consul3&quot;</span>,<span class="s2">&quot;Address&quot;</span>:<span class="s2">&quot;172.17.0.5&quot;</span><span class="o">}</span>,<span class="o">{</span><span class="s2">&quot;Node&quot;</span>:<span class="s2">&quot;consul4&quot;</span>,<span class="s2">&quot;Address&quot;</span>:<span class="s2">&quot;172.17.0.3&quot;</span><span class="o">}]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>DNSも反応します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>dig @172.17.0.2 -p 8600 consul2.node.consul. ANY
+</span><span class='line'>
+</span><span class='line'><span class="c"># (snip)</span>
+</span><span class='line'>
+</span><span class='line'>;; QUESTION SECTION:
+</span><span class='line'>;consul2.node.consul.           IN      ANY
+</span><span class='line'>
+</span><span class='line'>;; ANSWER SECTION:
+</span><span class='line'>consul2.node.consul.    0       IN      A       172.17.0.4
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://narinari.github.io/assets/consul_docker_console.png" alt="Consulを動かしている様子" /></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Y Combinator]]></title>
